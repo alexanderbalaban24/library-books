@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -14,7 +13,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser());
+app.use(express.json());
 app.use(loggerMiddleware);
 
 app.use('/public', express.static(__dirname+"/public"));
