@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  storage:
+    image: redis
+  counter:
+    build: ./counter
+    ports:
+      - 82:3003
+    environment:
+      - PORT=3003
+      - REDIS_URL=redis://storage
+    depends_on:
+      - storage
+  books:
+    build: .
+    ports:
+      - 81:3002
+    environment:
+      - PORT=3002
+      - COUNTER_URL=http://counter:3003/
+    depends_on:
+      - counter
